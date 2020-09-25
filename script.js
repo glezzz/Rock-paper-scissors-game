@@ -62,29 +62,31 @@ function playGame(userChoice) {
     let computerScoreElement = document.getElementById("computer-score");
 
     //play game: -1 = computer wins, 0 = draw, 1 = user wins
-    const USER_WIN = 1;
+    const USER_WIN = 1;     // use these const to make it more readable in later stages
+    const DRAW = 0
+    const COMP_WIN = -1
     let outcome;
 
     if (userChoice === computerChoice) {
-        outcome = 0;
+        outcome = DRAW;
     }
     if (userChoice === "rock") {
         if (computerChoice === "scissors") {
             outcome = USER_WIN;
 
         } else if (computerChoice === "paper") {
-            outcome = -1;
+            outcome = COMP_WIN;
         }
     } else if (userChoice === "paper") {
         if (computerChoice === "scissors") {
-            outcome = -1;
+            outcome = COMP_WIN;
 
         } else if (computerChoice === "rock") {
             outcome = USER_WIN;
         }
     } else if (userChoice === "scissors") {
         if (computerChoice === "rock") {
-            outcome = -1;
+            outcome = COMP_WIN;
 
         } else if (computerChoice === "paper") {
             outcome = USER_WIN;
@@ -92,16 +94,16 @@ function playGame(userChoice) {
     }
 
     switch(outcome) {
-        case -1: // lose
+        case COMP_WIN: // lose
             result.innerHTML = "You pick " + userChoice + ", you lose";
             computerScoreElement.innerHTML = ++compScore;
             break;
-        case 0: // draw
+        case DRAW: // draw
             result.innerHTML = "It's a draw";
             break;
         case USER_WIN: // win
             result.innerHTML = "You pick " + userChoice + ", you win";
-            userScoreElement.innerHTML = ++userScore; // ++ a la izquierda cambia el valor ANTES de usarlo, ala derecha DESPUES
+            userScoreElement.innerHTML = ++userScore; // ++ a la izquierda cambia el valor ANTES de usarlo, a la derecha DESPUES
             break;
     }
 }
